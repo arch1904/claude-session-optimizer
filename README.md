@@ -38,11 +38,23 @@ cat ~/claude_session_refresh.log
 
 | File | Purpose |
 |---|---|
-| `session_refresh.sh` | Sends a single message to Claude CLI and logs the result |
+| `session_refresh.sh` | Sends a single message to Claude CLI and logs the result (60s timeout, auto-rotates log) |
 | `install.sh` | Sets up (or updates) the daily cron job |
+| `status.sh` | Shows cron status and recent log entries |
+| `uninstall.sh` | Removes the cron job (use `--clean` to also delete the log file) |
+
+## Status
+
+```bash
+./status.sh
+```
 
 ## Uninstall
 
 ```bash
-crontab -l | grep -v "session_refresh" | crontab -
+# Remove cron job only
+./uninstall.sh
+
+# Remove cron job and delete log file
+./uninstall.sh --clean
 ```
