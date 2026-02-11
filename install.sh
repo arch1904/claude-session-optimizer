@@ -22,7 +22,7 @@ MINUTE=$((10#${TIME:2:2}))
 chmod +x "$SCRIPT_PATH"
 
 # Add cron entry, preserving existing crontab (idempotent - removes old entry first)
-(crontab -l 2>/dev/null | grep -v "session_refresh"; echo "$MINUTE $HOUR * * * $SCRIPT_PATH") | crontab -
+(crontab -l 2>/dev/null | grep -v "session_refresh" || true; echo "$MINUTE $HOUR * * * $SCRIPT_PATH") | crontab -
 
 echo "Cron job installed: runs daily at $TIME."
 echo "Verify with: crontab -l"
